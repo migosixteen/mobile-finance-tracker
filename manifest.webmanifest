@@ -1,0 +1,12 @@
+{
+  "name": "Finance Tracker",
+  "short_name": "Finance",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#111827",
+  "description": "Mobile credit card, debt, personal debt, bills, payoff, and paycheck tracker.",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

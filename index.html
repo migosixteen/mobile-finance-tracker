@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Personal Finance</p>
+      <h1>Finance Tracker</h1>
+    </div>
+    <button id="installBtn" class="ghost small hidden" type="button">Install</button>
+  </header>
+
+  <main class="container">
+    <section class="summary-grid" id="summaryGrid">
+      <article class="summary-card"><span>Card / Bank Debt</span><strong id="sumDebt">$0.00</strong></article>
+      <article class="summary-card"><span>I Owe People</span><strong id="sumPeopleOwe">$0.00</strong></article>
+      <article class="summary-card"><span>People Owe Me</span><strong id="sumOwedMe">$0.00</strong></article>
+      <article class="summary-card"><span>Bills Due</span><strong id="sumBills">$0.00</strong></article>
+    </section>
+
+    <section id="dashboard" class="view active">
+      <div class="section-head"><div><h2>Dashboard</h2><p>What needs your attention.</p></div></div>
+      <div id="alerts" class="stack"></div>
+      <div class="panel"><h3>Upcoming Payments</h3><div id="upcomingList" class="stack compact"></div></div>
+    </section>
+
+    <section id="accounts" class="view">
+      <div class="section-head"><div><h2>Credit & Loans</h2><p>Cards, LOCs, and loans.</p></div><button class="primary" data-open="accountForm">+ Add</button></div>
+      <div id="accountList" class="stack"></div>
+    </section>
+
+    <section id="personal" class="view">
+      <div class="section-head"><div><h2>Personal Debt</h2><p>Money borrowed from or lent to people.</p></div><button class="primary" data-open="personForm">+ Add</button></div>
+      <div id="personList" class="stack"></div>
+    </section>
+
+    <section id="bills" class="view">
+      <div class="section-head"><div><h2>Bills</h2><p>Recurring and one-time bills.</p></div><button class="primary" data-open="billForm">+ Add</button></div>
+      <div id="billList" class="stack"></div>
+    </section>
+
+    <section id="payoff" class="view">
+      <div class="section-head"><div><h2>Payoff Plan</h2><p>Snowball or avalanche strategy.</p></div></div>
+      <div class="panel form-grid">
+        <label>Strategy<select id="strategy"><option value="avalanche">Avalanche — highest APR</option><option value="snowball">Snowball — smallest balance</option></select></label>
+        <label>Extra monthly payment<input id="extraPayment" type="number" min="0" step="1" value="300" /></label>
+      </div>
+      <div id="payoffList" class="stack"></div>
+    </section>
+
+    <section id="paycheck" class="view">
+      <div class="section-head"><div><h2>Paycheck Planner</h2><p>See what each paycheque needs to cover.</p></div></div>
+      <div class="panel form-grid">
+        <label>Pay frequency<select id="payFreq"><option value="14">Every 2 weeks</option><option value="15">Twice monthly</option><option value="7">Weekly</option><option value="30">Monthly</option></select></label>
+        <label>Next payday<input id="nextPayday" type="date" /></label>
+        <label>Budget per paycheque<input id="payBudget" type="number" min="0" step="1" value="1200" /></label>
+        <button id="makePlan" class="primary wide" type="button">Generate Plan</button>
+      </div>
+      <div id="paycheckList" class="stack"></div>
+    </section>
+
+    <section id="payments" class="view">
+      <div class="section-head"><div><h2>Payments</h2><p>Record payments and update balances.</p></div><button class="primary" data-open="paymentForm">+ Record</button></div>
+      <div id="paymentList" class="stack"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Primary">
+    <button data-view="dashboard" class="active">Home</button>
+    <button data-view="accounts">Debt</button>
+    <button data-view="personal">People</button>
+    <button data-view="bills">Bills</button>
+    <button data-view="payoff">Payoff</button>
+    <button data-view="paycheck">Pay</button>
+    <button data-view="payments">History</button>
+  </nav>
+
+  <dialog id="accountForm" class="sheet"><form method="dialog" id="accountFormEl" class="sheet-card"><div class="sheet-head"><h3>Add Credit / Loan</h3><button value="cancel" class="ghost" type="submit">Close</button></div><label>Name<input id="aName" required /></label><label>Type<select id="aType"><option>Credit Card</option><option>Line of Credit</option><option>Personal Loan</option><option>Other Debt</option></select></label><div class="two"><label>Balance<input id="aBalance" type="number" min="0" step="0.01" required /></label><label>Limit<input id="aLimit" type="number" min="0" step="0.01" /></label></div><div class="two"><label>APR %<input id="aApr" type="number" min="0" step="0.01" /></label><label>Minimum<input id="aMin" type="number" min="0" step="0.01" /></label></div><label>Due date<input id="aDue" type="date" /></label><button class="primary wide" value="default">Save</button></form></dialog>
+
+  <dialog id="personForm" class="sheet"><form method="dialog" id="personFormEl" class="sheet-card"><div class="sheet-head"><h3>Add Personal Debt</h3><button value="cancel" class="ghost" type="submit">Close</button></div><label>Person<input id="pName" required /></label><label>Direction<select id="pDir"><option value="i_owe">I owe this person</option><option value="owes_me">This person owes me</option></select></label><div class="two"><label>Balance<input id="pBalance" type="number" min="0" step="0.01" required /></label><label>Agreed payment<input id="pPay" type="number" min="0" step="0.01" /></label></div><label>Target date<input id="pDue" type="date" /></label><label>Notes<textarea id="pNotes" rows="3"></textarea></label><button class="primary wide" value="default">Save</button></form></dialog>
+
+  <dialog id="billForm" class="sheet"><form method="dialog" id="billFormEl" class="sheet-card"><div class="sheet-head"><h3>Add Bill</h3><button value="cancel" class="ghost" type="submit">Close</button></div><label>Bill name<input id="bName" required /></label><label>Category<select id="bCategory"><option>Housing</option><option>Utilities</option><option>Phone</option><option>Internet</option><option>Insurance</option><option>Transportation</option><option>Subscription</option><option>Childcare</option><option>Other</option></select></label><div class="two"><label>Amount<input id="bAmount" type="number" min="0" step="0.01" required /></label><label>Due date<input id="bDue" type="date" /></label></div><label>Frequency<select id="bFreq"><option>Monthly</option><option>Every 2 weeks</option><option>Weekly</option><option>Quarterly</option><option>Yearly</option><option>One-time</option></select></label><label class="check"><input id="bAuto" type="checkbox" /> Autopay</label><button class="primary wide" value="default">Save</button></form></dialog>
+
+  <dialog id="paymentForm" class="sheet"><form method="dialog" id="paymentFormEl" class="sheet-card"><div class="sheet-head"><h3>Record Payment</h3><button value="cancel" class="ghost" type="submit">Close</button></div><label>Type<select id="payType"><option value="account">Credit / Loan</option><option value="person">Personal Debt</option><option value="bill">Bill</option></select></label><label>Item<select id="payItem"></select></label><label>Amount<input id="payAmount" type="number" min="0.01" step="0.01" required /></label><label>Date<input id="payDate" type="date" required /></label><label>Note<input id="payNote" /></label><button class="primary wide" value="default">Save Payment</button></form></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
