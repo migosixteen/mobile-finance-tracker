@@ -1,36 +1,17 @@
-# Finance Tracker
+# Finance Tracker v2.4
 
-Mobile-first personal finance PWA for tracking:
-- Credit cards and loans
-- Personal debt (money owed to/from people)
-- Bills
-- Payoff priority (Avalanche / Snowball)
-- Paycheck payment planning
-- Payment history
+Mobile-first personal finance PWA for GitHub Pages.
 
-## Run locally
-Open the folder with a local web server. Example:
+## Fixes in v2.4
+- Credit & Loans: Edit button opens the selected item and saves changes.
+- Personal Debt and Bills: Edit remains supported.
+- Every Add/Edit sheet can be closed with **Close**, tapping the dark backdrop, or Esc/back where supported.
+- Close works even when required form fields are blank.
+- CSS and JavaScript are embedded in `index.html`, preventing missing `app.js` / `styles.css` deployment issues.
+- Service-worker cache changed to `finance-tracker-v24-20260909` so old cached app code is replaced.
+- Existing data remains in `localStorage` using the same `financeTrackerV2` key.
 
-```bash
-python -m http.server 8000
-```
+## GitHub Pages
+Upload all files in this folder to your repository root, then enable **Settings → Pages → Deploy from a branch → main → /(root)**.
 
-Then open `http://localhost:8000`.
-
-## Publish with GitHub Pages
-1. Create a new GitHub repository.
-2. Upload all files in this folder to the repository root.
-3. Commit and push.
-4. In GitHub, go to **Settings → Pages**.
-5. Under **Build and deployment**, choose **Deploy from a branch**.
-6. Select your main branch and `/ (root)`.
-7. Save. GitHub will provide your public URL.
-
-## Install on iPhone
-Open the GitHub Pages URL in Safari → Share → **Add to Home Screen**.
-
-## Install on Android / desktop
-Open the GitHub Pages URL in Chrome/Edge and use the Install option when available.
-
-## Data storage
-Data is stored locally in the browser using `localStorage`. It is not synced to a server.
+If an older installed PWA is still shown on iPhone, visit the GitHub Pages URL once in Safari and reload. If Safari still shows the old build, remove the old Home Screen app, reload the site, then add it to Home Screen again.
